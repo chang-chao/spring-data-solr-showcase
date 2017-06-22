@@ -38,6 +38,7 @@ class ProductServiceImpl implements ProductService {
 
 	private static final Pattern IGNORED_CHARS_PATTERN = Pattern.compile("\\p{Punct}");
 
+	@Autowired
 	private ProductRepository productRepository;
 
 	@Override
@@ -72,10 +73,4 @@ class ProductServiceImpl implements ProductService {
 		}
 		return result;
 	}
-
-	@Autowired
-	public void setProductRepository(ProductRepository productRepository) {
-		this.productRepository = productRepository;
-	}
-
 }

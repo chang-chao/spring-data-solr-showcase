@@ -40,5 +40,4 @@ interface ProductRepository extends SolrCrudRepository<Product, String> {
 
 	@Facet(fields = { SearchableProductDefinition.NAME_FIELD_NAME })
 	FacetPage<Product> findByNameStartsWith(Collection<String> nameFragments, Pageable pagebale);
-
 }

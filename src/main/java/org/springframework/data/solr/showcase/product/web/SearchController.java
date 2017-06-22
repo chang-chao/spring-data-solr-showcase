@@ -45,7 +45,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Component
 @Scope("prototype")
 public class SearchController {
+	@Autowired
 	private ProductService productService;
+
 	@RequestMapping("/search")
 	public String search(Model model, @RequestParam(value = "q", required = false) String query,
 			@PageableDefault(page = 0, size = ProductService.DEFAULT_PAGE_SIZE) Pageable pageable,
@@ -79,11 +81,6 @@ public class SearchController {
 			}
 		}
 		return titles;
-	}
-
-	@Autowired
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
 	}
 
 }

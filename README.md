@@ -20,3 +20,6 @@ Access via [localhost:8983/solr/](http://localhost:8983/solr/#/techproducts)
 ```
 
 Access via [localhost:8080/search](http://localhost:8080/search)
+
+### Notice:
+For the issue of [Inconsistencies with SolrTemplate with Multiple Cores](https://jira.spring.io/browse/DATASOLR-403),the product detail page can not be shown currently.

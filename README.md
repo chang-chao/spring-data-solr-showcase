@@ -7,7 +7,7 @@ In order to run this example a 4+ [Solr Server](http://lucene.apache.org/solr/do
 
 The application is meant to work with the example data provided by the Solr distribution.
 
-### Running Solr
+### Running Solr(6.6.0)
 ```emacs
 :solr> ./bin/solr start -e techproducts
 ```

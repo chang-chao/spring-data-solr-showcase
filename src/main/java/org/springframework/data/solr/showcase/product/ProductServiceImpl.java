@@ -51,13 +51,13 @@ class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product findById(String id) {
-		return productRepository.findOne(id);
+		return productRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public FacetPage<Product> autocompleteNameFragment(String fragment, Pageable pageable) {
 		if (StringUtils.isBlank(fragment)) {
-			return new SolrResultPage<Product>(Collections.<Product> emptyList());
+			return new SolrResultPage<Product>(Collections.<Product>emptyList());
 		}
 		return productRepository.findByNameStartsWith(splitSearchTermAndRemoveIgnoredCharacters(fragment), pageable);
 	}

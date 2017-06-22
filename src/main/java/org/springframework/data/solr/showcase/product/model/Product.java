@@ -18,7 +18,7 @@ package org.springframework.data.solr.showcase.product.model;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.solr.core.geo.GeoLocation;
+import org.springframework.data.geo.Point;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.data.solr.showcase.product.SearchableProductDefinition;
@@ -26,7 +26,7 @@ import org.springframework.data.solr.showcase.product.SearchableProductDefinitio
 /**
  * @author Christoph Strobl
  */
-@SolrDocument(solrCoreName = "collection1")
+@SolrDocument(solrCoreName = "techproducts")
 public class Product implements SearchableProductDefinition {
 
 	private @Id @Indexed String id;
@@ -43,7 +43,7 @@ public class Product implements SearchableProductDefinition {
 
 	private @Indexed Integer popularity;
 
-	private @Indexed(LOCATION_FIELD_NAME) GeoLocation location;
+	private @Indexed(LOCATION_FIELD_NAME) Point location;
 
 	public String getId() {
 		return id;
@@ -101,11 +101,11 @@ public class Product implements SearchableProductDefinition {
 		this.popularity = popularity;
 	}
 
-	public GeoLocation getLocation() {
+	public Point getLocation() {
 		return location;
 	}
 
-	public void setLocation(GeoLocation location) {
+	public void setLocation(Point location) {
 		this.location = location;
 	}
 

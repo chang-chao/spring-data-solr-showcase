@@ -15,14 +15,16 @@
  */
 package org.springframework.data.solr.showcase.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.solr.core.convert.SolrCustomConversions;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author Christoph Strobl
@@ -31,15 +33,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class WebContext {
 
 	@Bean
-	public WebMvcConfigurerAdapter mvcViewConfigurer() {
+	public WebMvcConfigurer mvcViewConfigurer() {
 
-		return new WebMvcConfigurerAdapter() {
+		return new WebMvcConfigurer() {
 
 			@Override
 			public void addViewControllers(ViewControllerRegistry registry) {
 
-				registry.addViewController("/").setViewName("search");
-				registry.addViewController("/monitor").setViewName("monitor");
+				registry.addViewController("/").setViewName("home");
 			}
 
 			@Override
@@ -48,4 +49,10 @@ public class WebContext {
 			}
 		};
 	}
+
+	@Bean
+	public SolrCustomConversions solrCustomConversions() {
+		return new SolrCustomConversions(new ArrayList<>());
+	}
+
 }

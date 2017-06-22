@@ -45,12 +45,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Component
 @Scope("prototype")
 public class SearchController {
-
 	private ProductService productService;
-
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(value = "q", required = false) String query, @PageableDefault(
-			page = 0, size = ProductService.DEFAULT_PAGE_SIZE) Pageable pageable, HttpServletRequest request) {
+	public String search(Model model, @RequestParam(value = "q", required = false) String query,
+			@PageableDefault(page = 0, size = ProductService.DEFAULT_PAGE_SIZE) Pageable pageable,
+			HttpServletRequest request) {
 
 		model.addAttribute("page", productService.findByName(query, pageable));
 		model.addAttribute("pageable", pageable);
@@ -71,7 +70,10 @@ public class SearchController {
 		Set<String> titles = new LinkedHashSet<String>();
 		for (Page<FacetFieldEntry> page : result.getFacetResultPages()) {
 			for (FacetFieldEntry entry : page) {
-				if (entry.getValue().contains(query)) { // we have to do this as we do not use terms vector or a string field
+				if (entry.getValue().contains(query)) { // we have to do this as
+														// we do not use terms
+														// vector or a string
+														// field
 					titles.add(entry.getValue());
 				}
 			}

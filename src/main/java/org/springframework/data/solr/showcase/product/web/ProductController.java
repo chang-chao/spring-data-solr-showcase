@@ -23,8 +23,9 @@ import org.springframework.data.solr.showcase.product.ProductService;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.HandlerMapping;
 
 /**
  * @author Christoph Strobl
@@ -37,10 +38,22 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping("/product/{id}")
-	public String search(Model model, @PathVariable("id") String id, HttpServletRequest request) {
+
+
+	@RequestMapping("/product/**")
+	public String search(Model model, HttpServletRequest request) {
+		String id = extractId(request);
 		model.addAttribute("product", productService.findById(id));
 		return "product";
+	}
+
+	private String extractId(final HttpServletRequest request) {
+		// path='/product/EN7800GTX/2DHTV/256M'
+		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		// bestMatchPattern='/product/**'
+		String bestMatchPattern = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+		// returns:EN7800GTX/2DHTV/256M
+		return new AntPathMatcher().extractPathWithinPattern(bestMatchPattern, path);
 	}
 
 }

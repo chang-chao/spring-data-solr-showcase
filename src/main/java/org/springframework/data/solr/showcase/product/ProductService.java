@@ -25,7 +25,7 @@ import org.springframework.data.solr.showcase.product.model.Product;
  */
 public interface ProductService {
 
-	int DEFAULT_PAGE_SIZE = 3;
+	public static final int DEFAULT_PAGE_SIZE = 10;
 
 	Page<Product> findByName(String searchTerm, Pageable pageable);
 
